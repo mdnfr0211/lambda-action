@@ -1,4 +1,4 @@
-name: 'Deploy Lambda Functions'
+name: 'Deploy Lambda Function'
 description: 'Deploys Lambda functions using a custom script'
 author: 'Mohamed Navfar'
 
