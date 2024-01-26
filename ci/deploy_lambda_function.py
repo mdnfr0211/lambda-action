@@ -12,10 +12,6 @@ function_config_file = os.getenv("LAMBDA_CONFIG_FILE")
 publish = os.getenv("PUBLISH", "true") == "true"
 runner_id = os.getenv("RUNNER_ID")
 
-default_layers = [
-    "arn:aws:lambda:ap-southeast-1:044395824272:layer:AWS-Parameters-and-Secrets-Lambda-Extension:5"
-]
-
 
 def read_function_data(file_path):
     with open(file_path, "r") as f:
@@ -74,6 +70,7 @@ def update_functions_config(function):
     layers = function.get("layers", [])
     runtime = function["runtime"]
     handler = function["handler"]
+    ext_layers = function["extension_layers"]
 
     custom_layers = [get_latest_layer_versions(layer) for layer in layers]
 
@@ -81,7 +78,7 @@ def update_functions_config(function):
 
     response = lambda_client.update_function_configuration(
         FunctionName=function_name,
-        Layers=custom_layers + default_layers,
+        Layers=custom_layers + ext_layers,
         Runtime=runtime,
         Handler=handler
     )

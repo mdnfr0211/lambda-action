@@ -12,6 +12,21 @@ GitHub Action for deploying Lambda code and Updating Configuration to an Existin
             "zip_file_name": "function.zip",
             "runtime": "python3.11",
             "layers": [],
+            "extension_layers": [
+                "arn:aws:lambda:<your-region>:044395824272:layer:AWS-Parameters-and-Secrets-Lambda-Extension:11"
+            ],
+            "handler": "app.lambdaHandler"
+        },
+        {
+            "function_name": "test1",
+            "zip_file_name": "function1.zip",
+            "runtime": "python3.12",
+            "layers": [
+                "test"
+            ],
+            "extension_layers": [
+                "arn:aws:lambda:<your-region>:634166935893:layer:vault-lambda-extension:13"
+            ],
             "handler": "app.lambdaHandler"
         }
     ],

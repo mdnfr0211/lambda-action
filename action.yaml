@@ -5,7 +5,7 @@ author: 'Mohamed Navfar'
 inputs:
   ALIAS_NAME:
     description: 'Alias name'
-    required: true
+    required: false
   ARTIFACT_BUCKET:
     description: 'Artifact bucket name'
     required: true
@@ -14,7 +14,7 @@ inputs:
     required: true
   PUBLISH:
     description: 'Publish flag'
-    required: true
+    required: false
   RUNNER_ID:
     description: 'Runner ID'
     required: true
