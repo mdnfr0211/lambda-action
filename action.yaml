@@ -1,0 +1,28 @@
+name: 'Deploy Lambda Functions'
+description: 'Deploys Lambda functions using a custom script'
+author: 'Mohamed Navfar'
+
+inputs:
+  ALIAS_NAME:
+    description: 'Alias name'
+    required: true
+  ARTIFACT_BUCKET:
+    description: 'Artifact bucket name'
+    required: true
+  LAMBDA_CONFIG_FILE:
+    description: 'Path to Lambda config file'
+    required: true
+  PUBLISH:
+    description: 'Publish flag'
+    required: true
+  RUNNER_ID:
+    description: 'Runner ID'
+    required: true
+
+runs:
+  using: 'docker'
+  image: "Dockerfile"
+
+branding:
+  icon: "layers"
+  color: "gray-dark"
