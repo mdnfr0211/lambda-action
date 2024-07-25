@@ -4,20 +4,20 @@ author: 'Mohamed Navfar'
 
 inputs:
   ALIAS_NAME:
-    description: 'Alias name'
+    description: 'Alias Name'
     required: false
   ARTIFACT_BUCKET:
-    description: 'Artifact bucket name'
+    description: 'Artifact S3 Bucket Name'
+    required: true
+  ARTIFACT_PATH:
+    description: 'S3 Path of the Artifact'
     required: true
   LAMBDA_CONFIG_FILE:
-    description: 'Path to Lambda config file'
+    description: 'Path to Lambda Config File'
     required: true
   PUBLISH:
-    description: 'Publish flag'
+    description: 'Publish Flag'
     required: false
-  RUNNER_ID:
-    description: 'Runner ID'
-    required: true
 
 runs:
   using: 'docker'
