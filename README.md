@@ -27,7 +27,8 @@ GitHub Action for deploying Lambda code and Updating Configuration to an Existin
             "extension_layers": [
                 "arn:aws:lambda:<your-region>:634166935893:layer:vault-lambda-extension:13"
             ],
-            "handler": "app.lambdaHandler"
+            "handler": "app.lambdaHandler",
+            "architecture": "x86_64"
         }
     ],
     "layers": []
@@ -56,17 +57,17 @@ jobs:
           aws-region: <AWS-REGION>
         
       - name: deploy lambda
-        uses: mdnfr0211/lambda-action@v1
+        uses: mdnfr0211/lambda-action@v4
         env:
           PUBLISH: true
-          RUNNER_ID: 1
           ALIAS_NAME: dev
           ARTIFACT_BUCKET: <ARTIFACT-BUCKET>
+          ARTIFACT_PATH: function/<PATH>
           LAMBDA_CONFIG_FILE: <PATH-OF-JSON-FILE>
 
 ```
 
-The Lambda code(zip) should be structured under the artifact bucket in the format: `function/<runner-id>/function.zip`.
+The Artifact Path is not required to include the zip file, It requires only the Path for the Zip File
 
 
 ## License
