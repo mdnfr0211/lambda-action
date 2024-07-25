@@ -10,7 +10,7 @@ alias = os.getenv("ALIAS_NAME")
 artifact_bucket = os.getenv("ARTIFACT_BUCKET")
 function_config_file = os.getenv("LAMBDA_CONFIG_FILE")
 publish = os.getenv("PUBLISH", "true") == "true"
-runner_id = os.getenv("RUNNER_ID")
+artifact_path = os.getenv("ARTIFACT_PATH")
 
 
 def read_function_data(file_path):
@@ -26,13 +26,14 @@ def wait_for_function_update(function_name):
 def update_functions(function):
     function_name = function["function_name"]
     zip_file_name = function["zip_file_name"]
+    architecture = function.get("architecture", "x86_64")
 
     response = lambda_client.update_function_code(
         FunctionName=function_name,
         S3Bucket=artifact_bucket,
-        S3Key=f"function/{runner_id}/{zip_file_name}",
+        S3Key=f"{artifact_path}/{zip_file_name}",
         Publish=publish,
-        Architectures=["x86_64"],
+        Architectures=[architecture],
     )
     print(f"Updated Function Code for {function_name}")
 
