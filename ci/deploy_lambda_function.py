@@ -27,6 +27,8 @@ def update_functions(function):
     function_name = function["function_name"]
     zip_file_name = function["zip_file_name"]
     architecture = function.get("architecture", "x86_64")
+    
+    wait_for_function_update(function_name)
 
     response = lambda_client.update_function_code(
         FunctionName=function_name,
@@ -51,6 +53,8 @@ def update_functions_alias(function_data):
         )
         for i in paginator:
             latest_version = i["Versions"][-1]["Version"]
+        
+        wait_for_function_update(function_name)
 
         response = lambda_client.update_alias(
             FunctionName=function_name,
@@ -75,8 +79,6 @@ def update_functions_config(function):
 
     custom_layers = [get_latest_layer_versions(layer) for layer in layers]
 
-    wait_for_function_update(function_name)
-
     response = lambda_client.update_function_configuration(
         FunctionName=function_name,
         Layers=custom_layers + ext_layers,
@@ -94,9 +96,9 @@ def update_functions_configuration(function_data):
 if __name__ == "__main__":
     function_data = read_function_data(function_config_file)["functions"]
 
-    update_functions_code(function_data)
-    
     update_functions_configuration(function_data)
+    
+    update_functions_code(function_data)
 
     if publish:
         update_functions_alias(function_data)
