@@ -95,8 +95,8 @@ if __name__ == "__main__":
     function_data = read_function_data(function_config_file)["functions"]
 
     update_functions_code(function_data)
+    
+    update_functions_configuration(function_data)
 
     if publish:
         update_functions_alias(function_data)
-
-    update_functions_configuration(function_data)
