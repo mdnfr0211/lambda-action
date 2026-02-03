@@ -1,27 +1,35 @@
-name: 'Deploy Lambda Function'
-description: 'Deploys Lambda functions using a custom script'
-author: 'Mohamed Navfar'
+name: "Deploy Lambda Functions"
+description: "Deploy Lambda code and update configuration to existing Lambda functions with concurrent updates and comprehensive error handling"
+author: "Mohamed Navfar"
 
 inputs:
-  ALIAS_NAME:
-    description: 'Alias Name'
+  alias_name:
+    description: "Alias name to update (required if publish is true)"
     required: false
-  ARTIFACT_BUCKET:
-    description: 'Artifact S3 Bucket Name'
+    default: ""
+  artifact_bucket:
+    description: "S3 bucket containing the Lambda deployment packages"
     required: true
-  ARTIFACT_PATH:
-    description: 'S3 Path of the Artifact'
+  artifact_path:
+    description: "Path within the S3 bucket to the directory containing zip files"
     required: true
-  LAMBDA_CONFIG_FILE:
-    description: 'Path to Lambda Config File'
+  lambda_config_file:
+    description: "Path to the JSON configuration file"
     required: true
-  PUBLISH:
-    description: 'Publish Flag'
+  publish:
+    description: "Whether to publish a new version and update alias"
     required: false
+    default: "true"
 
 runs:
-  using: 'docker'
+  using: "docker"
   image: "Dockerfile"
+  env:
+    ALIAS_NAME: ${{ inputs.alias_name }}
+    ARTIFACT_BUCKET: ${{ inputs.artifact_bucket }}
+    ARTIFACT_PATH: ${{ inputs.artifact_path }}
+    LAMBDA_CONFIG_FILE: ${{ inputs.lambda_config_file }}
+    PUBLISH: ${{ inputs.publish }}
 
 branding:
   icon: "layers"
