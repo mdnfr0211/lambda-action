@@ -1,5 +1,5 @@
 name: "Deploy Lambda Functions"
-description: "Deploy Lambda code and update configuration to existing Lambda functions with concurrent updates and comprehensive error handling"
+description: "Deploy Lambda code and update configuration with concurrent updates and comprehensive error handling"
 author: "Mohamed Navfar"
 
 inputs:
